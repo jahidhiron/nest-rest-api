@@ -1,0 +1,10 @@
+{
+  "error": { "user-not-found": "User not found" },
+  "success": {
+    "current-user": "Get current user successful",
+    "user-detail": "Get user detail successful",
+    "update-user": "User updated successful",
+    "delete-user": "User deleted successful",
+    "user-list": "Get user list successful"
+  }
+}

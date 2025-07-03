@@ -1,0 +1,120 @@
+name: Amani Forged API
+
+on:
+  push:
+    branches:
+      - main
+      # - staging
+
+jobs:
+  staging:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/staging'
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Add Host to Known Hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H "$HOST" >> ~/.ssh/known_hosts
+        shell: /usr/bin/bash -e {0}
+        env:
+          HOST: ${{ secrets.STAGING_HOST }}
+
+      - name: Deployment
+        run: |
+          echo "$KEY" > private_key.pem
+          chmod 600 private_key.pem
+          ssh -i private_key.pem $USER@$HOST "
+            cd $APP_DIR &&
+            git fetch --all &&
+            git reset --hard origin/main &&
+            npm ci --legacy-peer-deps &&
+            rm -rf node_modules/.cache &&
+            npm run deploy:stage
+          "
+          rm private_key.pem
+        shell: /usr/bin/bash -e {0}
+        env:
+          HOST: ${{ secrets.PROD_HOST }}
+          USER: ${{ secrets.PROD_USER }}
+          KEY: ${{ secrets.PROD_KEY }}
+          APP_DIR: ${{ secrets.PROD_PROJECT_DIR }}
+
+      - name: Setup nginx
+        run: |
+          echo "$KEY" > private_key.pem
+          chmod 600 private_key.pem
+          ssh -i private_key.pem $USER@$HOST "
+            cd $APP_DIR/nginx &&
+            bash stage-setup.sh
+          "
+          rm private_key.pem
+        env:
+          HOST: ${{ secrets.STAGING_HOST }}
+          USER: ${{ secrets.STAGING_USER }}
+          KEY: ${{ secrets.STAGING_KEY }}
+          APP_DIR: ${{ secrets.STAGING_PROJECT_DIR }}
+
+  production:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Add Host to Known Hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H "$HOST" >> ~/.ssh/known_hosts
+        shell: /usr/bin/bash -e {0}
+        env:
+          HOST: ${{ secrets.PROD_HOST }}
+
+      - name: Deployment
+        run: |
+          echo "$KEY" > private_key.pem
+          chmod 600 private_key.pem
+          ssh -i private_key.pem $USER@$HOST "
+            cd $APP_DIR &&
+            git fetch --all &&
+            git reset --hard origin/main &&
+            npm ci --legacy-peer-deps &&
+            rm -rf node_modules/.cache &&
+            npm run deploy:prod
+          "
+          rm private_key.pem
+        shell: /usr/bin/bash -e {0}
+        env:
+          HOST: ${{ secrets.PROD_HOST }}
+          USER: ${{ secrets.PROD_USER }}
+          KEY: ${{ secrets.PROD_KEY }}
+          APP_DIR: ${{ secrets.PROD_PROJECT_DIR }}
+
+      - name: Setup nginx
+        run: |
+          echo "$KEY" > private_key.pem
+          chmod 600 private_key.pem
+          ssh -i private_key.pem $USER@$HOST "
+            cd $APP_DIR/nginx &&
+            bash prod-setup.sh
+          "
+          rm private_key.pem
+        env:
+          HOST: ${{ secrets.PROD_HOST }}
+          USER: ${{ secrets.PROD_USER }}
+          KEY: ${{ secrets.PROD_KEY }}
+          APP_DIR: ${{ secrets.PROD_PROJECT_DIR }}

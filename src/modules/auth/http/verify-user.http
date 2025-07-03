@@ -1,0 +1,7 @@
+POST http://localhost:5000/api/v1/auth/verify-user
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "token": "a2945080fe97a87eb5ec0a3953703d1bece2ffd9fb824d08c5b663794f8bfbdd"
+}

@@ -1,0 +1,13 @@
+{
+  "error": {
+    "book-not-found": "Book not found",
+    "isbn-already-exist": "ISBN already exist"
+  },
+  "success": {
+    "create-book": "Book created successful",
+    "book-detail": "Get book detail successful",
+    "update-book": "Book updated successful",
+    "delete-book": "Book deleted successful",
+    "book-list": "Get book list successful"
+  }
+}

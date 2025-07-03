@@ -1,0 +1,46 @@
+services:
+  netzet-test-api:
+    container_name: ${API_CONTAINER_NAME}
+    build:
+      context: .
+      args:
+        NODE_ENV: ${NODE_ENV}
+    ports:
+      - '${PORT}:${PORT}'
+    networks:
+      - app-network
+    env_file:
+      - ${ENV_FILE_NAME}
+    restart: always
+    volumes:
+      - sqlite-db:/app/.data
+    depends_on:
+      redis:
+        condition: service_healthy
+
+  redis:
+    image: redis:7.2-alpine
+    container_name: ${REDIS_HOST}
+    ports:
+      - ${REDIS_PORT}:${REDIS_PORT}
+    volumes:
+      - redis-data:/data
+    networks:
+      - app-network
+    restart: unless-stopped
+    command: redis-server --requirepass ${REDIS_PASSWORD} --save 60 1 --loglevel warning
+    environment:
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  sqlite-db:
+  redis-data:

@@ -1,0 +1,25 @@
+{
+  "success": {
+    "signup": "Signup successful",
+    "signin": "Signin successful",
+    "refresh-token": "Generate refresh tokens successful",
+    "user-verification-token": "Your verification token sent to your email successful",
+    "forgot-password-token": "Your reset password token sent to your email successful",
+    "verify-user": "User verified successful",
+    "password-reset": "Password reset successful",
+    "change-password": "Password changed successful",
+    "logout": "Logout successful"
+  },
+  "error": {
+    "email-exist": "Email already exist",
+    "user-not-found": "User not found",
+    "invalid-credentials": "Invalid credentials",
+    "user-already-verified": "User already verified",
+    "invalid-token": "Invalid token",
+    "old-password-not-match": "Old password doesn't match",
+    "max-login-device-limit": "Maximum {maxLoginDeviceLimit} device login limit reached",
+    "invalid-refresh-token": "Invalid refresh token",
+    "unauthorized": "Unauthorized",
+    "permission-denied": "Permission denied"
+  }
+}

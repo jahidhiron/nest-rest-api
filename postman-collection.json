@@ -1,0 +1,907 @@
+{
+	"info": {
+		"_postman_id": "1a86677b-571a-4941-a45d-05ffb522cd7d",
+		"name": "netzet-test-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3378045"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "signup",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "content-language",
+								"value": "bn",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Jhnon\",\r\n    \"lastName\": \"Doe\",\r\n    \"email\": \"admin@gmail.com\",\r\n    \"password\": \"String@123456\",\r\n    \"role\": \"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/signup",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "signin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"admin@gmail.com\",\r\n    \"password\": \"String@123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/signin",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "refresh-token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/refresh-token",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"refresh-token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user-verification-token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"namehiron.96@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/user-verification-token",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"user-verification-token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "verify-user-token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"jahidul@ewwfl.com\",\r\n    \"token\": \"533412c069ee63ed25922b021b7309cd2aa91eacf7b0ca3ffbc8db491506e301\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/verify-user",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"verify-user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "forgot-password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"hironse.96@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/forgot-password",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"forgot-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reset-password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"hironse.96@gmail.com\",\r\n    \"token\": \"c1b384f6893f3206ca574a517f876e32c5763079b9b5dde5f97b088457361cda\",\r\n    \"password\": \"555555\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/reset-password",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"reset-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "change-password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJKYWhpZCIsImxhc3ROYW1lIjoiSGlyb24iLCJzdWIiOjIsImVtYWlsIjoiaGlyb25zZS45NkBnbWFpbC5jb20iLCJyb2xlIjoiYXV0aG9yIiwidmVyaWZpZWQiOmZhbHNlLCJpYXQiOjE3NTE1MzIwNzUsImV4cCI6MTc1MTUzNTY3NSwiYXVkIjoibmV0amV0LWFwaS10ZXN0IiwiaXNzIjoibmV0amV0LWFwaS10ZXN0In0.UVMWeA43JO-mU0RcvZTIyfwb6KtFOSknvJMbIvNqmqc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"oldPassword\": \"555555\",\r\n    \"newPassword\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/change-password",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"change-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJKYWhpZCIsImxhc3ROYW1lIjoiSGlyb24iLCJzdWIiOjIsImVtYWlsIjoiaGlyb25zZS45NkBnbWFpbC5jb20iLCJyb2xlIjoiYXV0aG9yIiwidmVyaWZpZWQiOmZhbHNlLCJpYXQiOjE3NTE1MzE5OTYsImV4cCI6MTc1MTUzNTU5NiwiYXVkIjoibmV0amV0LWFwaS10ZXN0IiwiaXNzIjoibmV0amV0LWFwaS10ZXN0In0.C3PXIHXuqmi6eNz2_ndfpfO5mVHo_KVay1-Nu0UyCao",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/logout",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "current-user",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJKYWhpZCIsImxhc3ROYW1lIjoiSGlyb24iLCJzdWIiOjIsImVtYWlsIjoiaGlyb25zZS45NkBnbWFpbC5jb20iLCJyb2xlIjoiYXV0aG9yIiwidmVyaWZpZWQiOmZhbHNlLCJpYXQiOjE3NTE1MzIxMTIsImV4cCI6MTc1MTUzNTcxMiwiYXVkIjoibmV0amV0LWFwaS10ZXN0IiwiaXNzIjoibmV0amV0LWFwaS10ZXN0In0.q4qMju6wYVjt8FDJoDt2ulRGE725b-sVo67CIgp9s98",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/current-user",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"current-user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user-detail",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJKYWhpZCIsImxhc3ROYW1lIjoiSGlyb24iLCJzdWIiOjIsImVtYWlsIjoiaGlyb25zZS45NkBnbWFpbC5jb20iLCJyb2xlIjoiYXV0aG9yIiwidmVyaWZpZWQiOmZhbHNlLCJpYXQiOjE3NTE1MzIxMTIsImV4cCI6MTc1MTUzNTcxMiwiYXVkIjoibmV0amV0LWFwaS10ZXN0IiwiaXNzIjoibmV0amV0LWFwaS10ZXN0In0.q4qMju6wYVjt8FDJoDt2ulRGE725b-sVo67CIgp9s98",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user-list",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJKYWhpZCIsImxhc3ROYW1lIjoiSGlyb24iLCJzdWIiOjEsImVtYWlsIjoibmFtZWhpcm9uLjk2QGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsInZlcmlmaWVkIjp0cnVlLCJpYXQiOjE3NTE1MzIxNTUsImV4cCI6MTc1MTUzNTc1NSwiYXVkIjoibmV0amV0LWFwaS10ZXN0IiwiaXNzIjoibmV0amV0LWFwaS10ZXN0In0.zcvhOsK3lNGu0fh21gCU0HSYevS8CzYLL7HOLlPE9LE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users?sort=[{\"whom\":\"id\", \"order\": \"asc\"}]",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "size",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "[{\"whom\":\"id\", \"order\": \"asc\"}]"
+								},
+								{
+									"key": "q",
+									"value": "test1sssssss",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJKYWhpZCIsImxhc3ROYW1lIjoiSGlyb24iLCJzdWIiOjEsImVtYWlsIjoibmFtZWhpcm9uLjk2QGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsInZlcmlmaWVkIjp0cnVlLCJpYXQiOjE3NTE1MzIxNTUsImV4cCI6MTc1MTUzNTc1NSwiYXVkIjoibmV0amV0LWFwaS10ZXN0IiwiaXNzIjoibmV0amV0LWFwaS10ZXN0In0.zcvhOsK3lNGu0fh21gCU0HSYevS8CzYLL7HOLlPE9LE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Jahidul Islam\",\r\n    \"lastName\": \"Hiron\",\r\n    \"avatar\": \"https://google.com/img\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete-user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJKYWhpZCIsImxhc3ROYW1lIjoiSGlyb24iLCJzdWIiOjQsImVtYWlsIjoidXNlcjNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJ2ZXJpZmllZCI6ZmFsc2UsImlhdCI6MTc1MTQ1MjcxNiwiZXhwIjoxNzUxNDU2MzE2LCJhdWQiOiJuZXRqZXQtYXBpLXRlc3QiLCJpc3MiOiJuZXRqZXQtYXBpLXRlc3QifQ.QZC-HuvYnMet5vU6clQ6AYIhfg8tYC6Zga-a4dQOy8E",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/3",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "author",
+			"item": [
+				{
+					"name": "author-detail",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJKYWhpZCIsImxhc3ROYW1lIjoiSGlyb24iLCJzdWIiOjIsImVtYWlsIjoidGVzdDFAZ21haWwuY29tIiwicm9sZSI6ImF1dGhvciIsInZlcmlmaWVkIjpmYWxzZSwiaWF0IjoxNzUxNDMxNDk4LCJleHAiOjE3NTE0MzUwOTgsImF1ZCI6Im5ldGpldC1hcGktdGVzdCIsImlzcyI6Im5ldGpldC1hcGktdGVzdCJ9.xvwzT0Ffv1A-OZLjawCux2a6FeasViMIu4vewUxJ7qo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/authors/2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"authors",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "author-list",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJKYWhpZCIsImxhc3ROYW1lIjoiSGlyb24iLCJzdWIiOjEsImVtYWlsIjoibmFtZWhpcm9uLjk2QGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsInZlcmlmaWVkIjp0cnVlLCJpYXQiOjE3NTE1MzIzNTksImV4cCI6MTc1MTUzNTk1OSwiYXVkIjoibmV0amV0LWFwaS10ZXN0IiwiaXNzIjoibmV0amV0LWFwaS10ZXN0In0.UMT1bHJd2mn10xpnAzwQUAXwFXsugyctrMRoRUSH5UI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/authors",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"authors"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "size",
+									"value": "3",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "[{\"whom\":\"id\", \"order\": \"asc\"}]",
+									"disabled": true
+								},
+								{
+									"key": "q",
+									"value": "jahid",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-author",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJNaWtlIiwibGFzdE5hbWUiOiJIdXNzeSIsInN1YiI6MSwiZW1haWwiOiJoaXJvbnNlLjk2QGdtYWlsLmNvbSIsInJvbGUiOiJhdXRob3IiLCJ2ZXJpZmllZCI6ZmFsc2UsImlhdCI6MTc1MTUzNDMzNywiZXhwIjoxNzUxNTM3OTM3LCJhdWQiOiJuZXRqZXQtYXBpLXRlc3QiLCJpc3MiOiJuZXRqZXQtYXBpLXRlc3QifQ.bOYlDASj4ca3j1dbGMDPDSLWnZPR8anyaeg71u3VZe0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Mike\",\r\n    \"lastName\": \"Hassuy\",\r\n    \"bio\": \"This is a test bio updated\",\r\n    \"birthDate\": \"1990-07-02\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/authors/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"authors",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete-author",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJKYWhpZCIsImxhc3ROYW1lIjoiSGlyb24iLCJzdWIiOjEsImVtYWlsIjoibmFtZWhpcm9uLjk2QGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsInZlcmlmaWVkIjp0cnVlLCJpYXQiOjE3NTE1MzIzNTksImV4cCI6MTc1MTUzNTk1OSwiYXVkIjoibmV0amV0LWFwaS10ZXN0IiwiaXNzIjoibmV0amV0LWFwaS10ZXN0In0.UMT1bHJd2mn10xpnAzwQUAXwFXsugyctrMRoRUSH5UI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/authors/3",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"authors",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "book",
+			"item": [
+				{
+					"name": "book-detail",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJKYWhpZCIsImxhc3ROYW1lIjoiSGlyb24iLCJzdWIiOjIsImVtYWlsIjoidGVzdDFAZ21haWwuY29tIiwicm9sZSI6ImF1dGhvciIsInZlcmlmaWVkIjpmYWxzZSwiaWF0IjoxNzUxNDMxNDk4LCJleHAiOjE3NTE0MzUwOTgsImF1ZCI6Im5ldGpldC1hcGktdGVzdCIsImlzcyI6Im5ldGpldC1hcGktdGVzdCJ9.xvwzT0Ffv1A-OZLjawCux2a6FeasViMIu4vewUxJ7qo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/books/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"books",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "book-list",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJBbGJlcnQiLCJsYXN0TmFtZSI6Ikhpcm9uIiwic3ViIjo5LCJlbWFpbCI6ImF1dGhvcjdAZ21haWwuY29tIiwicm9sZSI6ImF1dGhvciIsInZlcmlmaWVkIjpmYWxzZSwiaWF0IjoxNzUxNDg1MzQ5LCJleHAiOjE3NTE0ODg5NDksImF1ZCI6Im5ldGpldC1hcGktdGVzdCIsImlzcyI6Im5ldGpldC1hcGktdGVzdCJ9.gIFM-WJQks48ULPbVHUm9aEc3HBtU-YS1LNaKj_bH88",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/books",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"books"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "size",
+									"value": "3",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "[{\"whom\":\"id\", \"order\": \"asc\"}]",
+									"disabled": true
+								},
+								{
+									"key": "q",
+									"value": "The Lies of Locke Lamora – Scott Lynch",
+									"disabled": true
+								},
+								{
+									"key": "authorId",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-book",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJNaWtlIiwibGFzdE5hbWUiOiJIdXNzeSIsInN1YiI6MSwiZW1haWwiOiJoaXJvbnNlLjk2QGdtYWlsLmNvbSIsInJvbGUiOiJhdXRob3IiLCJ2ZXJpZmllZCI6ZmFsc2UsImlhdCI6MTc1MTUzNDMzNywiZXhwIjoxNzUxNTM3OTM3LCJhdWQiOiJuZXRqZXQtYXBpLXRlc3QiLCJpc3MiOiJuZXRqZXQtYXBpLXRlc3QifQ.bOYlDASj4ca3j1dbGMDPDSLWnZPR8anyaeg71u3VZe0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"The Lies of Locke Lamora – Scott Lynch\",\r\n  \"isbn\": \"IBNSS-000004\",\r\n  \"publishedDate\": \"2013-01-02T00:00:00.000Z\",\r\n  \"genre\": \"Romance\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/books",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-book",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJNaWtlIiwibGFzdE5hbWUiOiJIdXNzeSIsInN1YiI6MSwiZW1haWwiOiJoaXJvbnNlLjk2QGdtYWlsLmNvbSIsInJvbGUiOiJhdXRob3IiLCJ2ZXJpZmllZCI6ZmFsc2UsImlhdCI6MTc1MTUzNDU1MSwiZXhwIjoxNzUxNTM4MTUxLCJhdWQiOiJuZXRqZXQtYXBpLXRlc3QiLCJpc3MiOiJuZXRqZXQtYXBpLXRlc3QifQ.SuQ-J3gWQrLFcQfxCcJF_EEQkBTV4m5jddcOj6-mSlk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"The Lies of Locke Lamora – Scott Lynch\",\r\n  \"isbn\": \"IBNSS-000005\",\r\n  \"publishedDate\": \"2013-01-02T00:00:00.000Z\",\r\n  \"genre\": \"Romance\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/books/3",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"books",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete-author",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJKYWhpZCIsImxhc3ROYW1lIjoiSGlyb24iLCJzdWIiOjMsImVtYWlsIjoiamFoaWR1bEBld3dmbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJ2ZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNzUxNTM0NzMwLCJleHAiOjE3NTE1MzgzMzAsImF1ZCI6Im5ldGpldC1hcGktdGVzdCIsImlzcyI6Im5ldGpldC1hcGktdGVzdCJ9.bSmkiwssdvAPJNuUi5MtR1YS1Px2IZbV0vakhEsKkZM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/books/2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"books",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

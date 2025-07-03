@@ -1,0 +1,8 @@
+{
+  "error": {
+    "token-expired": "Token expired",
+    "unauthorized": "Unauthorized",
+    "auth-token-required": "Authentication token is required",
+    "permission-denied": "Permission denied"
+  }
+}

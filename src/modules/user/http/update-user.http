@@ -1,0 +1,10 @@
+PATCH http://localhost:5000/api/v1/users/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+
+
+{
+  "firstName": "UpdatedFirstName",
+  "lastName": "UpdatedLastName",
+  "avatar": "https://example.com/avatar.png"
+}

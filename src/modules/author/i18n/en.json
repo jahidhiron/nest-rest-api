@@ -1,0 +1,14 @@
+{
+  "error": {
+    "author-not-found": "Author not found",
+    "author-id": "Author ID is a numeric value"
+  },
+  "success": {
+    "create-author": "Author created successful",
+    "current-author": "Get current author successful",
+    "author-detail": "Get author detail successful",
+    "update-author": "Author updated successful",
+    "delete-author": "Author deleted successful",
+    "author-list": "Get author list successful"
+  }
+}

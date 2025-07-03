@@ -1,0 +1,10 @@
+POST http://localhost:5000/api/v1/books
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+
+{
+  "title": "All you need to know Nestjs",
+  "isbn": "IBNSS-25000",
+  "publishedDate": "2013-01-02T00:00:00.000Z",
+  "genre": "Classic"
+}
