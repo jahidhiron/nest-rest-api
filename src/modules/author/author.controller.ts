@@ -63,7 +63,7 @@ export class AuthorController {
   @UseGuards(AuthGuard)
   @Patch('/:id')
   @UpdateAuthorDocs()
-  async updateUser(
+  async update(
     @Param('id') id: number,
     @Body() dto: UpdateAuthorDto,
     @User() userPayload: UserPayload,

@@ -17,7 +17,7 @@ export function AuthorDetailDocs() {
     }),
     ApiResponse({
       status: HttpStatus.OK,
-      description: 'Get user detail successful',
+      description: 'Get author detail successful',
       schema: {
         example: {
           method: HttpMethod.GET,
@@ -31,10 +31,8 @@ export function AuthorDetailDocs() {
             id: 2,
             firstName: 'Jahid',
             lastName: 'Hiron',
-            email: 'user1@gmail.com',
-            role: 'author',
-            verified: false,
-            avatar: null,
+            bio: 'user1@gmail.com',
+            birthDate: '1775-12-16',
           },
         },
       },

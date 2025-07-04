@@ -10,10 +10,10 @@ import { CreateAuthorProvider } from './providers/create-author.provider';
 import { UpdateAuthorProvider } from './providers/update-author.provider';
 import { FindOneAuthorProvider } from './providers/find-one-author.provider';
 import { FindAuthorsProvider } from './providers/find-authors.provider';
-import { RemoveAuthorProvider } from './providers/remove-user.provider';
 import { AuthorDetailProvider } from './providers/author-detail.provider';
 import { SharedModule } from '@/shared/shared.module';
 import { UserModule } from '../user/user.module';
+import { RemoveAuthorProvider } from './providers/remove-author.provider';
 
 @Module({
   imports: [

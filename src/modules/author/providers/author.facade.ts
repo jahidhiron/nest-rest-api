@@ -3,8 +3,8 @@ import { CreateAuthorProvider } from './create-author.provider';
 import { UpdateAuthorProvider } from './update-author.provider';
 import { FindOneAuthorProvider } from './find-one-author.provider';
 import { FindAuthorsProvider } from './find-authors.provider';
-import { RemoveAuthorProvider } from './remove-user.provider';
 import { AuthorDetailProvider } from './author-detail.provider';
+import { RemoveAuthorProvider } from './remove-author.provider';
 
 @Injectable()
 export class AuthorFacade {
