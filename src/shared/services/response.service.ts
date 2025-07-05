@@ -1,7 +1,7 @@
-import { HTTP_STATUS } from '@/shared';
+import { HTTP_STATUS, RESPONSE } from '@/shared';
 import { Injectable, Scope, Inject } from '@nestjs/common';
 import { REQUEST } from '@nestjs/core';
-import { Request } from 'express';
+import { Request, Response } from 'express';
 import { I18nService } from 'nestjs-i18n';
 import { IResponse } from './interfaces';
 
@@ -9,6 +9,7 @@ import { IResponse } from './interfaces';
 export class ResponseService {
   constructor(
     @Inject(REQUEST) private readonly request: Request,
+    @Inject(RESPONSE) private readonly response: Response,
     private readonly i18n: I18nService,
   ) {}
 
@@ -51,7 +52,8 @@ export class ResponseService {
       lang: this.getLangFromRequest(),
     });
 
-    const response: IResponse<T> = {
+    this.response.status(statusCode);
+    const res: IResponse<T> = {
       method,
       success,
       status: statusText,
@@ -62,10 +64,10 @@ export class ResponseService {
     };
 
     if (rest && typeof rest === 'object' && !Array.isArray(rest)) {
-      response.data = { ...rest };
+      res.data = { ...rest };
     }
 
-    return response;
+    return res;
   }
 
   async success<T extends object = any>(

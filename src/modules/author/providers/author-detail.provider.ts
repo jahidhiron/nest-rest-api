@@ -13,16 +13,16 @@ export class AuthorDetailProvider {
   ) {}
 
   async execute(id: number, userPayload: UserPayload): Promise<AuthorEntity> {
+    const author = await this.findOneAuthorProvider.execute({ id });
+    if (!author) {
+      await this.errorService.notFound(ModuleName.Author, 'author-not-found');
+    }
+
     if (userPayload.role !== Role.ADMIN && userPayload.id !== id) {
       await this.errorService.unauthorized(
         ModuleName.Auth,
         'permission-denied',
       );
-    }
-
-    const author = await this.findOneAuthorProvider.execute({ id });
-    if (!author) {
-      await this.errorService.notFound(ModuleName.Author, 'author-not-found');
     }
 
     return author as AuthorEntity;

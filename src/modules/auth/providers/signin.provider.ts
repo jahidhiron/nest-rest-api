@@ -106,7 +106,9 @@ export class SigninProvider {
     await this.redisService.sadd(userDevicesKey, fingerprint);
 
     // login history
-    await this.createAuthHistoryProvider.execute({ user: user as UserEntity });
+    await this.createAuthHistoryProvider.execute({
+      user: user as UserEntity,
+    });
 
     return { user: user as UserEntity, token: { accessToken, refreshToken } };
   }

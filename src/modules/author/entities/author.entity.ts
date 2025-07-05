@@ -1,20 +1,10 @@
 import { BaseEntity } from '@/common/entities';
 import { BookEntity } from '@/modules/book/entities';
 import { UserEntity } from '@/modules/user/entities';
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  OneToMany,
-  ManyToOne,
-  JoinColumn,
-} from 'typeorm';
+import { Entity, Column, OneToMany, ManyToOne, JoinColumn } from 'typeorm';
 
 @Entity('authors')
 export class AuthorEntity extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
-
   @Column({ name: 'first_name' })
   firstName: string;
 

@@ -88,11 +88,14 @@ describe('AuthorDetailProvider', () => {
       provider.execute(authorId, strangerPayload),
     ).rejects.toMatchObject({ status: 401 });
 
+    expect(findOneAuthorProvider.execute).toHaveBeenCalledWith({
+      id: authorId,
+    });
+
     expect(errorService.unauthorized).toHaveBeenCalledWith(
       ModuleName.Auth,
       'permission-denied',
     );
-    expect(findOneAuthorProvider.execute).not.toHaveBeenCalled();
   });
 
   it('throws HttpException 404 when author not found', async () => {

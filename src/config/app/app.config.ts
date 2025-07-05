@@ -6,6 +6,7 @@ export const appConfig = () => ({
   dev: env === 'development',
   staging: env === 'staging',
   prod: env === 'production',
+  test: env === 'test',
   port: parseInt(process.env.PORT ?? '5000', 10),
   corsOrigin: process.env.CORS_ORIGIN,
   companyName: process.env.COMPANY_NAME,

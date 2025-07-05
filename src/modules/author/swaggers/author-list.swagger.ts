@@ -20,7 +20,7 @@ export function AuthorListDocs() {
     ApiQuery({
       name: 'page',
       required: false,
-      description: 'Page number (1‑based)',
+      description: 'Page number (1-based)',
       example: 1,
       type: Number,
     }),

@@ -13,6 +13,7 @@ import { MailgunService } from './mail/mailgun.service';
 import { CommonModule } from '@/common/common.module';
 import { RedisModule } from './redis/redis.module';
 import { RedisService } from './redis/redis.service';
+import { ResponseProvider } from './providers';
 
 @Module({
   imports: [ConfigModule, JwtModule, MailModule, CommonModule, RedisModule],
@@ -24,6 +25,7 @@ import { RedisService } from './redis/redis.service';
     MailgunService,
     TokenService,
     RedisService,
+    ResponseProvider,
   ],
   exports: [
     SuccessService,
@@ -32,6 +34,7 @@ import { RedisService } from './redis/redis.service';
     MailgunService,
     TokenService,
     RedisService,
+    ResponseProvider,
   ],
 })
 export class SharedModule {}

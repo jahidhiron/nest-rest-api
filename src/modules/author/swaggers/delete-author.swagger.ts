@@ -17,19 +17,7 @@ export function DeleteAuthorDocs() {
     }),
 
     ApiResponse({
-      status: HttpStatus.OK,
-      description: 'Author deleted successfully',
-      schema: {
-        example: {
-          method: HttpMethod.DELETE,
-          success: true,
-          status: HTTP_STATUS.OK.context,
-          statusCode: HTTP_STATUS.OK.status,
-          path: '/api/v1/authors/1',
-          timestamp: '2025-07-02T18:40:11.098Z',
-          message: 'Author deleted successful',
-        },
-      },
+      status: HttpStatus.NO_CONTENT,
     }),
 
     ApiUnauthorizedResponse({

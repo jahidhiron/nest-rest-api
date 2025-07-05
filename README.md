@@ -17,7 +17,7 @@ Portfolio is a TypeScript-based **NestJS** backend application built for modern 
 - [Environment Variables](#-env-variables)
 - [Email](#-email)
 - [Help](#-help)
-- [License](#license)
+- [License](#-license)
 
 ---
 
@@ -60,14 +60,14 @@ npm run start:dev
 
 ```
 
-### 1. Start project in staging
+### 2. Start project in staging
 
 ```bash
 npm run deploy:stage
 
 ```
 
-### 1. Start project in production
+### 3. Start project in production
 
 ```bash
 npm run deploy:prod
@@ -81,22 +81,22 @@ npm run deploy:prod
 .
 ├── src/                                           # All application source code
 │   ├── common/                                    # Cross‑cutting utilities
-│   │   ├── decorator/                             # Custom NestJS / class decorators
-│   │   ├── dtos/                                  # Re‑usable DTOs (validation / typing)
+│   │   ├── decorator/
+│   │   ├── dtos/                                  # Re‑usable DTOs
 │   │   ├── entities/
-│   │   │   └── base.entity.ts                     # Base entity → id, createdAt, updatedAt
+│   │   │   └── base.entity.ts                     # Base entity → id, createdAt, updatedAt, isDelete
 │   │   ├── exceptions/                            # App‑wide HTTP / business exceptions
-│   │   ├── filters/                               # Global exception filters
-│   │   ├── guards/                                # Global auth / roles guards
-│   │   ├── i18n/                                  # Global translation resources (fallback)
-│   │   ├── interceptors/                          # Logging, response mapping, etc.
+│   │   ├── filters/                               # Global filters
+│   │   ├── guards/                                # Global auth guards
+│   │   ├── i18n/
+│   │   ├── interceptors/                          # Logging, data serialize, etc.
 │   │   ├── logger/                                # Winston adapter & formatting helpers
-│   │   ├── pipes/                                 # Validation / transformation pipes
+│   │   ├── pipes/                                 # Validation, deserialize query
 │   │   ├── repositories/
 │   │   │   └── base.repository.ts                 # Generic TypeORM repository
 │   │   └── services/
-│   │       ├── hash.service.ts                    # Bcrypt wrapper for hashing passwords
-│   │       ├── response.service.ts                # Standard success/error response builder
+│   │       ├── hash.service.ts                    # scrypt wrapper for hashing passwords
+│   │       ├── response.service.ts                # Standard success,error response builder
 │   │       └── success.service.ts                 # Centralised success message catalogue
 │   │   └── validators/                            # Global custom class‑validator decorators
 │   │
@@ -104,13 +104,13 @@ npm run deploy:prod
 │   │   ├── app/                                   # Application‑level settings (port, CORS, etc.)
 │   │   ├── jwt/                                   # JWT secrets & expiry
 │   │   ├── db/                                    # TypeORM configs (SQLite/Postgres)
-│   │   ├── mail/                                  # Mailgun keys, templates path
-│   │   ├── redis/                                 # Redis connection + Bull queue names
+│   │   ├── mail/                                  # Mailgun keys
+│   │   ├── redis/                                 # Redis key
 │   │   ├── swagger/                               # Swagger title, version, auth guard, etc.
 │   │   ├── winston/                               # Logger formats & transports
 │   │   ├── config.module.ts                       # Exposes ConfigModule.forRoot()
-│   │   ├── config.service.ts                      # Typed config service (env validation)
-│   │   └── i18n.config.ts                         # NestJS‑i18n setup (fs backend + resolver chain)
+│   │   ├── config.service.ts                      # Centralised config service
+│   │   └── i18n.config.ts                         # NestJS‑i18n setup
 │   │
 │   ├── helper/                                    # One‑off pure functions / small helpers
 │   │
@@ -120,30 +120,31 @@ npm run deploy:prod
 │   │   ├── auth/                                  # 🔐 Authentication / authorization domain
 │   │   │   ├── dtos/                              # Auth‑specific DTOs
 │   │   │   ├── entities/
-│   │   │   │   ├── login-history.entity.ts        # IP / user‑agent audit trail
-│   │   │   │   ├── verification-token.entity.ts   # Email / reset tokens
-│   │   │   │   └── index.ts                       # Entity barrel export
-│   │   │   ├── https/                             # External HTTP requests (e.g., social login)
-│   │   │   ├── i18n/                              # Auth‑localised messages auto‑loaded by i18n
-│   │   │   ├── interfaces/                        # Types / contracts used only by auth
-│   │   │   ├── providers/                         # Business‑logic “services” (For testabilit)
+│   │   │   │   ├── login-history.entity.ts        # IP, user‑agent audit trail
+│   │   │   │   ├── verification-token.entity.ts   # Email, reset tokens
+│   │   │   │   └── index.ts
+│   │   │   ├── https/                             # API endpoints
+│   │   │   ├── i18n/                              # Module-wise i18n message
+│   │   │   ├── interfaces/
+│   │   │   ├── providers/                         # Business‑logic “services” (For testability)
 │   │   │   │   ├── signup.provider.ts
 │   │   │   │   ├── signin.provider.ts
-│   │   │   │   └── …                              # (refresh, forgot‑password, etc.)
+│   │   │   │   └── …
 │   │   │   ├── repositories/
 │   │   │   │   ├── auth.repository.ts             # Extends BaseRepository with auth queries
-│   │   │   │   └── index.ts                       # Barrel export
-│   │   │   ├── swaggers/                          # `@nestjs/swagger` decorators per route
+│   │   │   │   └── index.ts
+│   │   │   ├── swaggers/                          # auth module swagger setup
 │   │   │   ├── templates/
-│   │   │   │   └── signup.hbs                     # Handlebars email template example
-│   │   │   ├── auth.controller.ts                 # Route handlers
-│   │   │   └── auth.module.ts                     # Combines providers + controller + imports
+│   │   │   │   ├── emails/
+│   │   │   │   │   └── signup.hbs                 # Handlebars email template example
+│   │   │   ├── auth.controller.ts
+│   │   │   └── auth.module.ts
 │   │   │
-│   │   ├── user/                                  # 👤 User CRUD (structure mirrors auth)
-│   │   ├── author/                                # 🖋  Author entity / routes
+│   │   ├── user/                                  # 👤 User module
+│   │   ├── author/                                # 🖋  Author module
 │   │   │   ├── ...
-│   │   │   ├── providers/                         # ✅ Unit tests for author providers
-│   │   │   │   ├── test/
+│   │   │   ├── providers/
+│   │   │   │   ├── test/                          # ✅ Unit tests for author providers
 │   │   │   │   │   ├── author.facade.spec.ts
 │   │   │   │   │   ├── create-author.provider.spec.ts
 │   │   │   │   │   ├── author-detail.provider.spec.ts
@@ -160,45 +161,52 @@ npm run deploy:prod
 │   │   │   ├── author.controller.spec.ts
 │   │   │   ├── author.controller.ts
 │   │   │   ├── author.module.ts
-│   │   └── book/                                  # 📚 Book entity / routes
+│   │   └── book/                                  # 📚 Book module
 │   │
 │   ├── shared/                                    # Singleton services used by many modules
-│   │   ├── constants/                             # String literals, regexes, etc.
-│   │   ├── enums/                                 # App‑wide enums
-│   │   ├── interfaces/                            # Shared TS interfaces
-│   │   ├── jwt/                                   # JWT sign/verify helpers
-│   │   ├── mail/                                  # Mailgun wrapper
-│   │   ├── redis/                                 # Redis client / Bull queue helpers
-│   │   ├── services/                              # Misc shared providers
-│   │   ├── types/                                 # Utility TS types
-│   │   └── shared.module.ts                       # Re‑export shared providers for feature modules
+│   │   ├── constants/
+│   │   ├── enums/
+│   │   ├── interfaces/
+│   │   ├── jwt/                                   # JWT sign,verify service
+│   │   ├── mail/                                  # Mailgun service
+│   │   ├── redis/                                 # Redis service
+│   │   ├── services/                              # Shared services
+│   │   ├── types/
+│   │   └── shared.module.ts
 │   │
 │   ├── utils/                                     # Generic, framework‑agnostic helpers
 │   │
-│   ├── app.controller.ts                          # Health‑check & root endpoints
-│   ├── app.module.ts                              # Root NestJS module
-│   ├── app.service.ts                             # Lightweight example service
-│   ├── db.service.ts                              # Programmatic DB connection (for scripts/tests)
-│   ├── main.ts                                    # NestFactory bootstrap
-│   ├── swagger.ts                                 # Swagger builder (includes basic‑auth guard)
-│   └── test/                                      # Jest e2e / unit test entrypoints
+│   ├── app.controller.ts
+│   ├── app.module.ts
+│   ├── app.service.ts
+│   ├── db.source.ts                               # Centralized TypeORM `DataSource` definition
+│   ├── main.ts
+│   ├── swagger.ts                                 # Swagger builder
+│   └── test/                                      # Jest e2e test
+│   │   └── interfaces/
+│   │   └── auth.e2e-helper.ts                     # Helper functions for authentication-related tests (e.g., signup, signin)
+│   │   └── author.e2e-spec.ts                     # E2E test specs for Author module (CRUD, auth, permissions)
+│   │   └── setup.ts                               # Global test setup (e.g., jest configuration, environment setup)
+│   │   └── test-app.setup.ts                      # Utility to create and configure the NestJS test application instance
 │
-├── .dockerignore                                  # Files to exclude from Docker builds
+├── .dockerignore
 ├── .env.development                               # Local dev env vars
 ├── .env.staging                                   # Staging env vars
 ├── .env.production                                # Production env vars
-├── .gitignore                                     # Standard Git ignore list
-├── docker-compose.yaml                            # App + Redis container orchestration
-├── Dockerfile                                     # Multi‑stage image build (builder + runtime)
+├── .env.test                                      # Test env vars
+├── .gitignore
+├── docker-compose.yaml                            # Container orchestration
+├── Dockerfile                                     # Multi‑stage image build
 ├── entrypoint.sh                                  # Container CMD → run migrations, start Nest
 ├── export.sh                                      # DB export helper script
+├── jest-e2e.json                                  # ⚙️ Jest config for e2e tests
 ├── jest.config.ts                                 # ⚙️ Jest config for unit tests
-├── eslint.config.mjs                              # ESLint monorepo‑style config
-├── nest-cli.json                                  # NestJS CLI ts‑paths / assets config
+├── eslint.config.mjs
+├── nest-cli.json
 ├── postman-collection.json                        # Postman collection for API consumers
-├── README.md                                      # 📖 You’re reading the updated version
-├── tsconfig.build.json                            # TS config for production build
-└── tsconfig.json                                  # TS config for IDE / ts-node
+├── README.md
+├── tsconfig.build.json
+└── tsconfig.json
 
 
 ```
@@ -206,38 +214,6 @@ npm run deploy:prod
 ## 🧪 Running Tests
 
 ### Unit Tests
-
-Run all unit tests using Jest:
-
-```bash
-npm run test
-
-```
-
-This codebase uses **Jest** and **ts-jest** for automated testing.  
-Currently, **the `Author` module is fully covered with unit tests**, targeting providers, the facade, and controller logic. Other modules can follow the same structure for coverage.
-
----
-
-### ✅ What is tested?
-
-Each unit test isolates a specific component by **mocking all external dependencies**, ensuring fast and reliable test runs.
-
-| Spec File                          | What it tests                          | Mocked Dependencies                    |
-| ---------------------------------- | -------------------------------------- | -------------------------------------- |
-| `create-author.provider.spec.ts`   | Author creation logic                  | `AuthorRepository`, `HashService`      |
-| `find-authors.provider.spec.ts`    | Finding a paginated list of authors    | `AuthorRepository`                     |
-| `find-one-author.provider.spec.ts` | Finding a single author by ID          | `AuthorRepository`                     |
-| `update-author.provider.spec.ts`   | Updating an author's details           | `AuthorRepository`                     |
-| `remove-author.provider.spec.ts`   | Soft-deleting an author                | `AuthorRepository`                     |
-| `author-detail.provider.spec.ts`   | Formatting a detailed author response  | — (mostly pure logic or mocked entity) |
-| `author.facade.spec.ts`            | Orchestrating create, update, delete   | All above provider classes             |
-| `author.controller.spec.ts`        | Routing, DTO validation, HTTP behavior | AuthorFacade, plus mock guards         |
-
-> 📁 Test files are organized inside `src/module/author/providers/test/` and next to the controller.  
-> This domain-scoped layout ensures clarity and test relevance.
-
----
 
 ### ▶️ Run the tests
 
@@ -266,15 +242,102 @@ Jest is configured in `jest.config.ts` and includes:
 
 ---
 
+This codebase uses **Jest** and **ts-jest** for automated testing.  
+Currently, **the `Author` module is fully covered with unit tests**, targeting providers, the facade, and controller logic. Other modules can follow the same structure for coverage.
+
+---
+
 ### 🧪 Mocking & Testing Guidelines
 
 This project uses **Jest + ts-jest** for unit and integration tests, focusing on isolated testing of **providers** (business logic/services) and **controllers** (HTTP layer). Below is an overall guideline to help you write clean, maintainable, and reliable tests for both layers.
 
 ---
 
-## 1. Testing Providers (Business Logic / Services)
+## 1. Testing Controllers
+
+This module contains comprehensive unit tests for the `AuthorController` in the Netzet Book Store API.
+
+### ✅ What is tested?
+
+This unit test targets the **controller layer logic**, ensuring it behaves correctly in isolation by mocking all external dependencies such as facades, services, and guards. It verifies that each controller method returns the expected response without relying on actual database access or service implementations.
+
+| Spec File                   | What it tests         | Mocked Dependencies          |
+| --------------------------- | --------------------- | ---------------------------- |
+| `author.controller.spec.ts` | Author creation logic | `DataSource`, `AuthorEntity` |
+
+> 📁 Test files are organized inside `src/module/author/`
+> This domain-scoped layout ensures clarity and test relevance.
+
+---
+
+### Key points:
+
+- All external dependencies are mocked (`AuthorFacade`, `SuccessService`, `Guards`) to isolate controller logic.
+- Covers core methods: `findMany`, `detail`, `update`, and `remove`.
+- Simulates realistic scenarios: successful fetch, update, delete, and empty results.
+- Avoids real database or service calls to ensure fast and deterministic test runs.
+- Guards like `AuthGuard`, `AuthorGuard`, and `AdminGuard` are stubbed to always allow access.
+
+### Typical methods to mock:
+
+| Method                       | Description                                            |
+| ---------------------------- | ------------------------------------------------------ |
+| `findMany.execute()`         | Fetches a paginated list of authors                    |
+| `userDetail.execute()`       | Retrieves a single author's detail                     |
+| `update.execute()`           | Updates an existing author's information               |
+| `remove.execute()`           | Deletes (soft/hard) an author                          |
+| `SuccessService.ok()`        | Returns a standard 200 success response                |
+| `SuccessService.noContent()` | Returns a standard 204 no-content response for deletes |
+
+### Example
+
+```ts
+const module = await Test.createTestingModule({
+  controllers: [AuthorController],
+  providers: [
+    {
+      provide: AuthorFacade,
+      useValue: {
+        findMany: { execute: jest.fn() },
+        userDetail: { execute: jest.fn() },
+      },
+    },
+    { provide: SuccessService, useValue: { ok: jest.fn() } },
+  ],
+}).compile();
+
+const controller = module.get(AuthorController);
+
+await controller.findMany({ page: 1, size: 10 });
+expect(authorFacade.findMany.execute).toHaveBeenCalledWith({
+  page: 1,
+  size: 10,
+});
+```
+
+## 2. Testing Providers (Business Logic / Services)
 
 Providers are classes that contain your core business logic, such as creating, updating, or querying data. Unit tests here should focus on the internal logic of each provider in isolation.
+
+### ✅ What is tested?
+
+Each unit test isolates a specific component by **mocking all external dependencies**, ensuring fast and reliable test runs.
+
+| Spec File                          | What it tests                          | Mocked Dependencies                    |
+| ---------------------------------- | -------------------------------------- | -------------------------------------- |
+| `create-author.provider.spec.ts`   | Author creation logic                  | `AuthorRepository`, `HashService`      |
+| `find-authors.provider.spec.ts`    | Finding a paginated list of authors    | `AuthorRepository`                     |
+| `find-one-author.provider.spec.ts` | Finding a single author by ID          | `AuthorRepository`                     |
+| `update-author.provider.spec.ts`   | Updating an author's details           | `AuthorRepository`                     |
+| `remove-author.provider.spec.ts`   | Soft-deleting an author                | `AuthorRepository`                     |
+| `author-detail.provider.spec.ts`   | Formatting a detailed author response  | — (mostly pure logic or mocked entity) |
+| `author.facade.spec.ts`            | Orchestrating create, update, delete   | All above provider classes             |
+| `author.controller.spec.ts`        | Routing, DTO validation, HTTP behavior | AuthorFacade, plus mock guards         |
+
+> 📁 Test files are organized inside `src/module/author/providers/test/`  
+> This domain-scoped layout ensures clarity and test relevance.
+
+---
 
 ### Key points:
 
@@ -285,11 +348,11 @@ Providers are classes that contain your core business logic, such as creating, u
 
 ### Typical mocks in providers:
 
-| Dependency          | What to mock                                                               |
-| ------------------- | -------------------------------------------------------------------------- |
-| Repositories        | `.create()`, `.save()`, `.findOne()`, `.update()`, `.softDelete()` methods |
-| Other Providers     | Any business methods your provider calls                                   |
-| Hashing / Utilities | Hashing functions, encryption, formatting                                  |
+| Dependency          | What to mock                                                              |
+| ------------------- | ------------------------------------------------------------------------- |
+| Repositories        | `.create()`, `.save()`, `.findOne()`, `.findMany()`, `.update()`, methods |
+| Other Providers     | Any business methods your provider calls                                  |
+| Hashing / Utilities | Hashing functions, encryption, formatting                                 |
 
 ### Example:
 
@@ -310,9 +373,24 @@ it('should create an author', async () => {
 });
 ```
 
-## 2. Testing Repositories (Data Access Layer)
+---
+
+## 3. Testing Repositories (Data Access Layer)
 
 Repositories interact with the database and contain data-access logic, typically implemented using TypeORM or any ORM.
+
+### ✅ What is tested?
+
+This unit test targets the **repository layer logic**, ensuring it behaves correctly in isolation by mocking all external services and dependencies such as hashing utilities or database operations.
+
+| Spec File                   | What it tests         | Mocked Dependencies          |
+| --------------------------- | --------------------- | ---------------------------- |
+| `author.repository.spec.ts` | Author creation logic | `DataSource`, `AuthorEntity` |
+
+> 📁 Test files are organized inside `src/module/author/repositories/test/`
+> This domain-scoped layout ensures clarity and test relevance.
+
+---
 
 ### Key points:
 
@@ -328,7 +406,7 @@ Repositories interact with the database and contain data-access logic, typically
 | `.create()`          | Creates a new entity instance                         |
 | `.save()`            | Persists entity in the database                       |
 | `.findOne()`         | Finds one entity by criteria                          |
-| `.merge()`           | Merges partial data into existing entity              |
+| `.update()`          | Update data in the existing entity                    |
 | `.delete()`          | Removes entity from database                          |
 | `.getOne()`          | Query builder method to fetch one result              |
 | `.getManyAndCount()` | Query builder method to fetch many results with count |
@@ -377,70 +455,154 @@ describe('AuthorRepository', () => {
     expect(result).toEqual(author);
   });
 
-  // Additional tests for update, delete, findOne, findAll, error cases ...
+  // Additional tests for update, delete, findOne, findMany, etc error cases ...
 });
 ```
 
-## Testing Controllers
+---
 
-| Focus                 | Approach                                     |
-| --------------------- | -------------------------------------------- |
-| Dependencies          | Mock providers and services with `jest.fn()` |
-| Guards / Interceptors | Override with no-op implementations          |
-| Controller methods    | Verify calls to providers with correct args  |
-| Responses             | Assert correct data or error handling        |
-| Setup                 | Use `Test.createTestingModule` with mocks    |
+### Test Summary
 
-### Example
-
-```ts
-const module = await Test.createTestingModule({
-  controllers: [AuthorController],
-  providers: [
-    {
-      provide: AuthorFacade,
-      useValue: {
-        findMany: { execute: jest.fn() },
-        userDetail: { execute: jest.fn() },
-      },
-    },
-    { provide: SuccessService, useValue: { ok: jest.fn() } },
-  ],
-}).compile();
-
-const controller = module.get(AuthorController);
-
-await controller.findMany({ page: 1, size: 10 });
-expect(authorFacade.findMany.execute).toHaveBeenCalledWith({
-  page: 1,
-  size: 10,
-});
 ```
+PASS src/modules/author/providers/test/author-detail.provider.spec.ts
+PASS src/modules/author/author.controller.spec.ts
+PASS src/modules/author/providers/test/update-author.provider.spec.ts
+PASS src/modules/author/providers/test/remove-author.provider.spec.ts
+PASS src/modules/author/providers/test/author.facade.spec.ts
+PASS src/modules/author/providers/test/create-author.provider.spec.ts
+PASS src/modules/author/providers/test/find-one-author.provider.spec.ts
+PASS src/modules/author/providers/test/find-authors.provider.spec.ts
+PASS src/modules/author/repositories/test/author.repository.spec.ts
+
+Test Suites: 9 passed, 9 total
+Tests: 47 passed, 47 total
+Snapshots: 0 total
+Ran all test suites
+```
+
+---
 
 ### 📁 Adding More Tests
 
 To expand testing into other modules (like `user`, `auth`, `book`), follow this structure:
 
+---
+
 ### E2E Tests
 
-Run all unit tests using Jest:
+### ▶️ Run the tests
 
-```bash
-npm run test:e2e
+Use these scripts defined in your `package.json`:
 
+| Description       | Command            |
+| ----------------- | ------------------ |
+| Run all e2e tests | `npm run test:e2e` |
+
+# Author Module - E2E Testing
+
+This document summarizes the end-to-end (E2E) tests for the **Author Module**. The tests cover authentication, CRUD operations, authorization, and error handling.
+
+---
+
+## Test Setup
+
+- Uses **NestJS** testing utilities and **Supertest** for HTTP request testing.
+- Auth tokens are generated for different user roles: author and admin.
+- Tests cover valid and invalid authentication scenarios.
+- Database is reset after all tests.
+- When a user signs up with the role `author`, **an associated author profile is automatically created behind the scenes**.
+
+---
+
+## Test Summary
+
+### Authentication
+
+- Author and admin users successfully authenticate and receive access tokens.
+- Requests without token or with invalid token are rejected with `401 Unauthorized`.
+
+### Author Update (`PATCH /api/v1/authors/:id`)
+
+- Author can update own profile (`200 OK`).
+- Missing or invalid token results in `401 Unauthorized`.
+- Author cannot update other authors (`401 Permission denied`).
+- Admin can update any author (`200 OK`).
+- Updating a non-existent author results in `404 Not Found`.
+
+### Author Detail (`GET /api/v1/authors/:id`)
+
+- Author can view own details (`200 OK`).
+- Author cannot view other authors' details (`401 Permission denied`).
+- Admin can view any author details (`200 OK`).
+- Requests without token or with invalid token rejected (`401 Unauthorized`).
+- Requests for non-existent author return `404 Not Found`.
+
+### Author List (`GET /api/v1/authors`)
+
+- Admin can get paginated, sorted, and filtered list of authors (`200 OK`).
+- Requests without token, with invalid token, or with insufficient role rejected (`401 Unauthorized`).
+
+### Author Deletion (`DELETE /api/v1/authors/:id`)
+
+- Admin can delete any author (`204 No Content`).
+- Missing or invalid token results in `401 Unauthorized`.
+- Author cannot delete other authors (`401 Permission denied`).
+- Deleting a non-existent author returns `404 Not Found`.
+
+---
+
+## Sample Test Output
+
+```
+Author Module (e2e)
+    √ /auth/signin (POST) - author should authenticate successfully (3 ms)
+    √ /auth/signin (POST) - admin should authenticate successfully (1 ms)
+    √ /auth/signin (POST) - author should authenticate successfully (1 ms)
+    √ /auth/signin (POST) - admin should authenticate successfully (1 ms)
+    √ PATCH /api/v1/authors/:id – author updates own profile (200) (60 ms)
+    √ PATCH /api/v1/authors/:id  missing token (401) (22 ms)
+    √ PATCH /api/v1/authors/:id – invalid token (401) (16 ms)
+    √ PATCH /api/v1/authors/:id – author updates another author (401) (25 ms)
+    √ PATCH /api/v1/authors/:id – admin updates author (200) (47 ms)
+    √ PATCH /api/v1/authors/:id – author not found (404) (22 ms)
+  GET /api/v1/authors - list authors
+    √ GET /api/v1/authors/:id - should return author detail (200) (19 ms)
+    √ GET /api/v1/authors/:id - should fail without token (401) (16 ms)
+    √ GET /api/v1/authors/:id - should fail with invalid token (401) (15 ms)
+    √ GET /api/v1/authors/:id - should fail if author accesses another author (401) (20 ms)
+    √ GET /api/v1/authors/:id - should fail if author not found (404) (20 ms)
+    √ GET /api/v1/authors/:id - admin should access any author detail (19 ms)
+    √ should return paginated author list (200) (24 ms)
+    √ should respect page & size query params (20 ms)
+    √ should sort authors (id desc) (21 ms)
+    √ should filter by free‑text search query (19 ms)
+    √ should fail without token (401) (16 ms)
+    √ should fail with invalid token (401) (15 ms)
+    √ should return 401 if role is insufficient (17 ms)
+  DELETE /api/v1/authors/:id (delete author)
+    √ admin deletes any author (204) (25 ms)
+    √ fails without token (401) (15 ms)
+    √ fails with invalid token (401) (14 ms)
+    √ fails when author tries to delete another author (401) (18 ms)
+    √ fails when author not found (404) (19 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       28 passed, 28 total
+Snapshots:   0 total
+Time:        12.093 s, estimated 14 s
 ```
 
 ## 📄 API Documentation
 
 After starting the server, you can access the interactive Swagger UI documentation at:
 
-- 🔗 **Local:** [http://localhost:5002/api-docs](http://localhost:5002/api-docs)
-- 🔗 **Live:** [https://api.test.developertroop.com/api-docs](https://api.test.developertroop.com/api-docs)
+- 🔗 **Swagger Url:** [http://localhost:YOUR_PORT/api-docs](http://localhost:<PORT>/api-docs)
 
 > ⚠️ The Swagger UI is protected with Basic Auth.
 >
 > Use the following credentials defined in your `.env` file:
 >
+> - **PORT:** `PORT`
 > - **Username:** `SWAGGER_USER`
 > - **Password:** `SWAGGER_PASSWORD`
 

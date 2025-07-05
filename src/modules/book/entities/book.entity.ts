@@ -2,7 +2,6 @@ import { BaseEntity } from '@/common/entities';
 import { AuthorEntity } from '@/modules/author/entities/author.entity';
 import {
   Entity,
-  PrimaryGeneratedColumn,
   Column,
   ManyToOne,
   Unique,
@@ -13,9 +12,6 @@ import {
 @Entity('books')
 @Unique(['isbn'])
 export class BookEntity extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
-
   @Column()
   title: string;
 

@@ -21,7 +21,7 @@ export function BookListDocs() {
       name: 'page',
       required: false,
       description: 'Page number (1‑based)',
-      example: 2,
+      example: 1,
       type: Number,
     }),
     ApiQuery({
@@ -43,7 +43,7 @@ export function BookListDocs() {
       name: 'q',
       required: false,
       description: 'Search term (matches title / ISBN / genre)',
-      example: 'Gatsby',
+      example: '',
       type: String,
     }),
     ApiQuery({

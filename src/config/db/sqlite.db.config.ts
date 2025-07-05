@@ -6,9 +6,8 @@ export const sqliteDbConfig = () => ({
   database: {
     type: process.env.DB_TYEP || 'sqlite',
     database: process.env.DB_PATH || 'database.sqlite',
-    // synchronize: false,
-    synchronize: env === 'development',
-    logging: env !== 'development',
+    synchronize: env === 'development' || env === 'test',
+    logging: env === 'development',
     namingStrategy: new NamingStrategy(),
   },
 });

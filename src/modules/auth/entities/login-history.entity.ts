@@ -1,29 +1,10 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  CreateDateColumn,
-  UpdateDateColumn,
-  ManyToOne,
-  JoinColumn,
-} from 'typeorm';
+import { Entity, Column, ManyToOne, JoinColumn } from 'typeorm';
 import { UserEntity } from '@/modules/user/entities';
 import { EntityName } from '@/shared/enums';
+import { BaseEntity } from '@/common/entities';
 
 @Entity(EntityName.LoginHistory)
-export class LoginHistory {
-  @PrimaryGeneratedColumn()
-  id: number;
-
-  @Column({ type: 'boolean', default: false })
-  isDeleted: boolean;
-
-  @CreateDateColumn({ type: 'datetime', default: () => "datetime('now')" })
-  createdAt: Date;
-
-  @UpdateDateColumn({ type: 'datetime', default: () => "datetime('now')" })
-  updatedAt: Date;
-
+export class LoginHistory extends BaseEntity {
   @Column({ type: 'varchar' })
   ip: string;
 

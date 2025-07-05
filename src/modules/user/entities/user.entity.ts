@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Entity, Column, OneToMany } from 'typeorm';
 import { BaseEntity } from '@/common/entities';
 import { LoginHistory, VerificationTokenEntity } from '@/modules/auth/entities';
 import { AuthorEntity } from '@/modules/author/entities';
@@ -6,9 +6,6 @@ import { EntityName } from '@/shared/enums';
 
 @Entity(EntityName.User)
 export class UserEntity extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
-
   @Column({ name: 'first_name' })
   firstName: string;
 

@@ -17,19 +17,7 @@ export function DeleteBookDocs() {
         '**IMPORTANT:** Only admin users can delete books. Deletes a book by its ID. No request body required.',
     }),
     ApiResponse({
-      status: HttpStatus.OK,
-      description: 'User deleted successful',
-      schema: {
-        example: {
-          method: HttpMethod.DELETE,
-          success: true,
-          status: HTTP_STATUS.OK.context,
-          statusCode: HTTP_STATUS.OK.status,
-          path: '/api/v1/users/2',
-          timestamp: '2025-07-02T12:07:11.098Z',
-          message: 'User deleted successful',
-        },
-      },
+      status: HttpStatus.NO_CONTENT,
     }),
     ApiUnauthorizedResponse({
       description: 'Unauthorized access',

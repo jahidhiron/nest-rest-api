@@ -33,6 +33,7 @@ export class AuthorController {
     private readonly authorFacade: AuthorFacade,
   ) {}
   @Serialize(GetAuthorsDto)
+  @UseGuards(AdminGuard)
   @UseGuards(AuthGuard)
   @Get('/')
   @AuthorListDocs()
@@ -83,6 +84,7 @@ export class AuthorController {
   @DeleteAuthorDocs()
   async remove(@Param('id') id: number) {
     await this.authorFacade.remove.execute(id);
+
     return this.successService.noContent<AuthorEntity>(
       ModuleName.Author,
       'delete-author',

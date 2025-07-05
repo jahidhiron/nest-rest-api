@@ -1,19 +1,10 @@
+import { BaseEntity } from '@/common/entities';
 import { UserEntity } from '@/modules/user/entities';
 import { EntityName } from '@/shared/enums';
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  ManyToOne,
-  JoinColumn,
-  RelationId,
-} from 'typeorm';
+import { Entity, Column, ManyToOne, JoinColumn, RelationId } from 'typeorm';
 
 @Entity(EntityName.VerificationToken)
-export class VerificationTokenEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class VerificationTokenEntity extends BaseEntity {
   @Column()
   token: string;
 
