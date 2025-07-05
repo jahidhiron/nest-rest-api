@@ -421,7 +421,7 @@ expect(authorFacade.findMany.execute).toHaveBeenCalledWith({
 
 To expand testing into other modules (like `user`, `auth`, `book`), follow this structure:
 
-### e2e Tests
+### E2E Tests
 
 Run all unit tests using Jest:
 
